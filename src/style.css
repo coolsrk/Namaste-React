@@ -33,7 +33,7 @@
     overflow: hidden;
 }
 
-.search {
+.topRated {
     padding: 20px;
 }
 
@@ -57,4 +57,23 @@
 .res-container {
     display: flex;
     flex-wrap: wrap;
+}
+
+.shimmer-ui-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shimmer-ui{
+    width: 300px;
+    height: 500px;
+    background-color: #f0f0f0;
+    margin: 5px;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    gap: 10px;
 }
