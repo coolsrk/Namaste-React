@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Restaurant } from "./Restaurant";
 // import * as RESTAURANTS from "../restaurent-details.json";
+import { Link } from "react-router-dom";
 import { Shimmer } from "./Shimmer";
 
 // let cardsData = [];
@@ -11,7 +12,6 @@ export const Body = () => {
 
   const [text, setText] = useState("");
   // console.log(text);
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -20,17 +20,18 @@ export const Body = () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-
     const json = await data.json();
-
-    setFilteredList(json?.data?.cards[5].card?.card?.gridElements?.infoWithStyle?.restaurants);
+    setFilteredList(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
     setRestroList(
-      json?.data?.cards[5].card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
 
+
   // Conditional rendering
-  if (resList.length === 0) {
+  if (resList?.length === 0) {
     return <Shimmer />;
   }
 
@@ -46,7 +47,9 @@ export const Body = () => {
 
         <button
           onClick={() => {
-            const searchList = resList.filter((e) => e.info.name.toLowerCase().includes(text.toLowerCase()));
+            const searchList = resList.filter((e) =>
+              e.info.name.toLowerCase().includes(text.toLowerCase())
+            );
             setFilteredList(searchList);
           }}
         >
@@ -65,7 +68,7 @@ export const Body = () => {
 
       <div className="res-container">
         {filteredList?.map((value) => (
-          <Restaurant resData={value.info} key={value.info.id} />
+          <Link to={"./restaurant/"+value?.info.id} key={value.info.id}><Restaurant resData={value.info} /></Link>
         ))}
       </div>
     </div>
