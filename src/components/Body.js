@@ -3,6 +3,7 @@ import { Restaurant } from "./Restaurant";
 // import * as RESTAURANTS from "../restaurent-details.json";
 import { Link } from "react-router-dom";
 import { Shimmer } from "./Shimmer";
+import { useOnlineStatus } from "../utils/hooks/useOnlineStatus";
 
 // let cardsData = [];
 
@@ -28,7 +29,8 @@ export const Body = () => {
       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
-
+  const onlineStatus = useOnlineStatus();
+  if(!onlineStatus) return <h1>Please check your internet connection.</h1>
 
   // Conditional rendering
   if (resList?.length === 0) {
