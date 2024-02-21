@@ -23,10 +23,10 @@ export const Body = () => {
     );
     const json = await data.json();
     setFilteredList(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
     setRestroList(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
     );
   };
   const onlineStatus = useOnlineStatus();

@@ -14,7 +14,7 @@ export const RestaurantMenu = () => {
   }
   return (
     <div className="menu">
-      <h1>{resInfo.cards[0].card.card.info.name}</h1>
+      <h1>{resInfo.cards[0].card.card.text}</h1>
       <h3>List of items</h3>
       <ul>
         {items?.map((item) => (

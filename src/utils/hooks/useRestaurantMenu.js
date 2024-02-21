@@ -17,8 +17,7 @@ export const useRestaurantMenu = (resId) => {
         setResInfo(json?.data);
         console.log(json?.data);
         setItems(
-          json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-            ?.card?.itemCards
+          json?.data.cards[4].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
         );
       };
 
