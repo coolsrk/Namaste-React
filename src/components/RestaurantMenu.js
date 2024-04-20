@@ -9,6 +9,12 @@ export const RestaurantMenu = () => {
 
   const {resId} = useParams();
   const {resInfo, items} = useRestaurantMenu(resId);
+
+  // Setting the showing category index from parent so we can control 
+  // which component to open from parent
+  // only index with showIndex value would be expanded and others will get collapsed.
+
+  const [showIndex, setShowIndex] = useState(null);
   
   if (!resInfo) {
     return <Shimmer />;
@@ -19,8 +25,10 @@ export const RestaurantMenu = () => {
         <h1>{resInfo.name}</h1>
       </div>
 
-      {items.map((category) => 
-        <RestaurantCategory category={category}></RestaurantCategory>
+      {items.map((category, index) =>
+        // This is thing is known as Controlled component. 
+        // Means the state is controlled by Parent component, not child one. 
+        <RestaurantCategory category={category} showItems={showIndex === index && true} setShowIndex={() => setShowIndex(index)}></RestaurantCategory>
       )}
     </div>
   );

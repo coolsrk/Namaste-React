@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Restaurant, WithPromotedLabel } from "./Restaurant";
 // import * as RESTAURANTS from "../restaurent-details.json";
 import { Link } from "react-router-dom";
 import { Shimmer } from "./Shimmer";
 import { useOnlineStatus } from "../utils/hooks/useOnlineStatus";
 import axios from 'axios';
+import { UserContext } from "../utils/contexts/UserContext";
 
 // let cardsData = [];
 
@@ -13,6 +14,8 @@ export const Body = () => {
   const [filteredList, setFilteredList] = useState([]);
 
   const PromotedRestaurant = WithPromotedLabel(Restaurant);
+  
+  const {loggedInUser, setUserName} = useContext(UserContext);
 
   const [text, setText] = useState("");
   // console.log(text);
@@ -42,15 +45,15 @@ export const Body = () => {
 
   return (
     <div className="body">
-      <div className="search border-slate-800">
+
         <input
           type="text"
-          className="search-box"
+          className="border border-black m-2"
           value={text}
           onChange={(e) => setText(e.target.value)}
         ></input>
 
-        <button
+        <button className="p-2"
           onClick={() => {
             const searchList = resList.filter((e) =>
               e.info.name.toLowerCase().includes(text.toLowerCase())
@@ -61,7 +64,7 @@ export const Body = () => {
           Search
         </button>
 
-        <button
+        <button className="p-2"
           onClick={() => {
             const res = resList?.filter((v) => v.info.avgRating > 4.2);
             setFilteredList(res);
@@ -69,7 +72,14 @@ export const Body = () => {
         >
           Top Rated Restaurants
         </button>
-      </div>
+
+        <input
+            type="text"
+            className="border border-black !outline-none"
+            // Setting up the text box value to current user name
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+          ></input>
 
       <div className="res-container">
         {filteredList?.map((value, index) => (

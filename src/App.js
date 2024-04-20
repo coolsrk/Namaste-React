@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { HeaderComponent } from "./components/Header";
 import { Body } from "./components/Body";
@@ -7,15 +7,26 @@ import { About } from "./components/class/About";
 import { Contact } from "./components/Contact";
 import { Error } from "./components/Error";
 import { RestaurantMenu } from "./components/RestaurantMenu";
+import { UserContext } from "./utils/contexts/UserContext";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
-const AppLayout = () => (
-  <div className="app">
-    <HeaderComponent />
-    <Outlet />
-  </div>
-);
+const AppLayout = () => {
+
+  const [userName, setUserName] = useState('default');
+
+  return (
+    // We can pass setUserName() into the value or say context variable so 
+    // we can globally access it and modify the username from any component.
+
+    <UserContext.Provider value={{loggedInUser: userName, setUserName: setUserName}}>
+      <div className="app">
+      <HeaderComponent />
+      <Outlet />
+      </div>
+    </UserContext.Provider>
+  );
+};
 
 const router = createBrowserRouter([
   {
