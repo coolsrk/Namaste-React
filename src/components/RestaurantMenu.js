@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Shimmer } from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { useRestaurantMenu } from "../utils/hooks/useRestaurantMenu";
+import { RestaurantCategory } from "./RestaurantCategory";
 
 
 export const RestaurantMenu = () => {
@@ -13,16 +14,14 @@ export const RestaurantMenu = () => {
     return <Shimmer />;
   }
   return (
-    <div className="menu">
-      <h1>{resInfo.cards[0].card.card.text}</h1>
-      <h3>List of items</h3>
-      <ul>
-        {items?.map((item) => (
-          <>
-            <li>{item.card.info.name}</li><p>Rs {item.card.info.price / 100}</p>
-          </>
-        ))}
-      </ul>
+    <div className="">
+      <div className="m-2 p-2 font-bold text-lg text-center">
+        <h1>{resInfo.name}</h1>
+      </div>
+
+      {items.map((category) => 
+        <RestaurantCategory category={category}></RestaurantCategory>
+      )}
     </div>
   );
 };

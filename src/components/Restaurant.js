@@ -25,3 +25,16 @@ export const Restaurant = (props) => {
     </div>
   );
 };
+
+// Higher order function 
+
+export const WithPromotedLabel = (Restaurant) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-black text-white rounded-sm">Promoted</label>
+        <Restaurant {...props}/>
+      </div>
+    );
+  };
+}

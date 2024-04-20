@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { Restaurant } from "./Restaurant";
+import { Restaurant, WithPromotedLabel } from "./Restaurant";
 // import * as RESTAURANTS from "../restaurent-details.json";
 import { Link } from "react-router-dom";
 import { Shimmer } from "./Shimmer";
 import { useOnlineStatus } from "../utils/hooks/useOnlineStatus";
+import axios from 'axios';
 
 // let cardsData = [];
 
 export const Body = () => {
   const [resList, setRestroList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
+
+  const PromotedRestaurant = WithPromotedLabel(Restaurant);
 
   const [text, setText] = useState("");
   // console.log(text);
@@ -39,7 +42,7 @@ export const Body = () => {
 
   return (
     <div className="body">
-      <div className="search">
+      <div className="search border-slate-800">
         <input
           type="text"
           className="search-box"
@@ -69,8 +72,13 @@ export const Body = () => {
       </div>
 
       <div className="res-container">
-        {filteredList?.map((value) => (
-          <Link to={"./restaurant/"+value?.info.id} key={value.info.id}><Restaurant resData={value.info} /></Link>
+        {filteredList?.map((value, index) => (
+          <Link to={"./restaurant/"+value?.info.id} key={value.info.id}>
+            {
+              index%2 === 0 ? (<PromotedRestaurant resData={value.info}/>): 
+              (<Restaurant resData={value.info} />)
+            }
+          </Link>
         ))}
       </div>
     </div>

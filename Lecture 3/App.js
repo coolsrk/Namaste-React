@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 // Bables tranpiles this JSX code to React.createElement
 const Title = () => <h2 className="heading">Hello from React 🚀</h2>;
 const heading = <h2>ElementInsideComponent</h2>;
-// console.log(title);
+
 
 // Components
 // 1. Class based - older
